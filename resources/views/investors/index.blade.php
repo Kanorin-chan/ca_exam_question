@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Funds') }}
+            {{ __('Investors') }}
         </h2>
     </x-slot>
 
@@ -9,17 +9,17 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             <div class="flex justify-end mb-4">
-                <a href="{{ route('funds.create') }}"
+                <a href="{{ route('investors.create') }}"
                    class="px-4 py-2 bg-blue-600 text-black rounded shadow">
-                    + Create Fund
+                    + Create Investor
                 </a>
             </div>
 
-            <form method="GET" action="{{ route('funds.index') }}" class="mb-4">
+            <form method="GET" action="{{ route('investors.index') }}" class="mb-4">
                 <div class="flex gap-2 items-center pb-2">
 
                     <input type="text" name="search" value="{{ request('search') }}"
-                        placeholder="Search fund..."
+                        placeholder="Search investor..."
                         class="border px-3 py-2 rounded w-64">
 
                     <button class="bg-blue-600 text-black px-4 py-2 rounded">
@@ -27,7 +27,7 @@
                     </button>
 
                     @if(request('search'))
-                    <a href="{{ route('funds.index') }}"
+                    <a href="{{ route('investors.index') }}"
                        class="ml-2 text-red-500 underline">
                         Clear
                     </a>
@@ -41,20 +41,22 @@
                     <thead>
                         <tr class="border-b bg-gray-100">
                             <th class="p-3">ID</th>
-                            <th class="p-3">Fund Name</th>
+                            <th class="p-3">Name</th>
+                            <th class="p-3">Email</th>
+                            <th class="p-3">Contact</th>
                             <th class="p-3">Actions</th>
-                            <th class="p-3">Created At</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        @foreach ($funds as $fund)
+                        @foreach ($investors as $inv)
                         <tr class="border-b">
-                            <td class="p-3">{{ $fund->id }}</td>
-                            <td class="p-3">{{ $fund->name }}</td>
-                            <td class="p-3">{{ $fund->created_at }}</td>
+                            <td class="p-3">{{ $inv->id }}</td>
+                            <td class="p-3">{{ $inv->name }}</td>
+                            <td class="p-3">{{ $inv->email }}</td>
+                            <td class="p-3">{{ $inv->contact_number }}</td>
                             <td class="p-3">
-                                <a href="{{ route('funds.edit', $fund->id) }}"
+                                <a href="{{ route('investors.edit', $inv->id) }}"
                                    class="text-blue-600 hover:underline">
                                    Edit
                                 </a>
@@ -63,9 +65,8 @@
                         @endforeach
                     </tbody>
                 </table>
-
                 <div class="mt-4">
-                    {{ $funds->withQueryString()->links() }}
+                    {{ $investors->withQueryString()->links() }}
                 </div>
             </div>
 
